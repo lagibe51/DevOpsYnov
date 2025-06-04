@@ -27,7 +27,7 @@ docker run -it ubuntu bash
 exit
 ```
 
-# Quelques commandes à tester
+## Quelques commandes à tester
 
 ```
 docker images
@@ -36,7 +36,7 @@ docker run -p 80:80 nginx
 docker run -d -p 80:80 nginx
 ```
 
-# Initialisation Git
+## Initialisation Git
 
 ```bash
 git init
@@ -99,7 +99,7 @@ La creation du volume ne permet pas de créer des versions
 #### Dockerfile
 Obligation de rebuild à chaque changement 
 
-# MySQL et PhpMyAdmin avec docker run
+## MySQL et PhpMyAdmin avec docker run
 
 Installations
 
@@ -120,3 +120,59 @@ Lancement des conteneurs
 docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test --network tp-net mysql:5.7
 docker run -d --name phpmyadmin -p 8082:80 --network tp-net -e PMA_HOST=mysql phpmyadmin/phpmyadmin
 ```
+
+## Docker Compose
+
+Création du fichier `docker-compose.yml` 
+
+**Questions : **
+
+# Docker Compose
+
+## a. Qu’apporte le fichier `docker-compose.yml` par rapport aux commandes `docker run` ?
+
+Le fichier `docker-compose.yml` apporte plusieurs **avantages** :
+
+### Lisibilité et maintenabilité
+- Centralisation de la configuration (images, ports, variables d’environnement, réseaux…)
+- Versionnable avec Git
+
+### Simplicité d'exécution
+- Tous les conteneurs sont lancés avec une seule commande : `docker-compose up`
+
+### Dépendances entre services
+- Gestion des réseaux, volumes, ordre de démarrage et liens entre services
+
+### Exemple :
+
+**Sans compose** :
+```bash
+docker run -d --name mysql ...
+docker run -d --name phpmyadmin ...
+```
+
+**Avec compose** :
+```bash
+docker-compose up -d
+```
+
+---
+
+## b. Quel moyen permet de configurer (utilisateur, base, mot de passe root…) MySQL au lancement ?
+
+C’est fait grâce aux **variables d’environnement** utilisées dans `docker-compose.yml` :
+
+```yaml
+environment:
+  MYSQL_ROOT_PASSWORD: root       # Mot de passe utilisateur
+  MYSQL_DATABASE: test            # Base de données créée
+```
+
+> Ces variables sont interprétées automatiquement par l’image `mysql` au démarrage.
+
+**Cela évite d’avoir à écrire manuellement des commandes SQL d’initialisation !**
+
+
+
+
+
