@@ -127,8 +127,6 @@ Création du fichier `docker-compose.yml`
 
 **Questions :**
 
-# Docker Compose
-
 ## a. Qu’apporte le fichier `docker-compose.yml` par rapport aux commandes `docker run` ?
 
 ### Lisibilité et maintenabilité
