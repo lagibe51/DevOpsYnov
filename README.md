@@ -125,19 +125,17 @@ docker run -d --name phpmyadmin -p 8082:80 --network tp-net -e PMA_HOST=mysql ph
 
 Création du fichier `docker-compose.yml` 
 
-**Questions : **
+**Questions :**
 
 # Docker Compose
 
 ## a. Qu’apporte le fichier `docker-compose.yml` par rapport aux commandes `docker run` ?
 
-Le fichier `docker-compose.yml` apporte plusieurs **avantages** :
-
 ### Lisibilité et maintenabilité
 - Centralisation de la configuration (images, ports, variables d’environnement, réseaux…)
 - Versionnable avec Git
 
-### Simplicité d'exécution
+### Execution simplfié
 - Tous les conteneurs sont lancés avec une seule commande : `docker-compose up`
 
 ### Dépendances entre services
