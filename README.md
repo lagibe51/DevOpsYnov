@@ -1,5 +1,10 @@
 # TP 1
 
+```
+SOTTI Giovanni
+GIBOUT Quentin
+```
+
 ## Installer Docker et Docker-Compose
 
 Ubuntu
