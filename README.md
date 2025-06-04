@@ -227,3 +227,113 @@ empêcher l'accès à la base de données depuis le web,
 et permettre de modifier l'application ainsi que de changer certains éléments plus facilement,
 en rendant l'application plus "modulaire"
 
+# TP 2
+
+# TP Docker – Application Express.js
+
+## Étape 1 – Préparation et Git
+
+- On télécharge le fichier `TP-2-Docker.zip`
+- On continu ce TP sur le même git qui a été crée dans le `TP 1`
+
+## Compléter le Dockerfile
+
+### Objectif :
+Builder correctement une application Node.js située dans le dossier `src/`
+
+### Exemple de Dockerfile :
+```Dockerfile
+FROM node:18
+
+# Création du répertoire de travail
+WORKDIR /app
+
+# Copie des fichiers package.json et package-lock.json
+COPY src/package*.json ./
+
+# Installation optimisée
+RUN npm install --only=production
+
+# Copie du code source
+COPY src/ .
+
+# Lancement de l'application
+CMD ["node", "index.js"]
+```
+
+### Question : Quelle option de npm est utilisée ?
+- `--only=production`
+
+### Bonne pratique respectée :
+- **Minimiser la taille de l’image Docker** en n’installant pas les dépendances de développement
+- Réduction de la surface d’attaque + optimisation performance
+
+---
+
+## Créer l’image `ma_super_app`
+
+```bash
+docker build -t ma_super_app .
+```
+
+---
+
+## Étape 4 – Compléter le fichier docker-compose.yml
+
+### Objectif :
+Lancer l’application Node.js + une base de données mySQL
+
+### Exemple avec MongoDB :
+```yaml
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=3306
+      - DATABASE_USERNAME=user
+      - DATABASE_PASSWORD=password
+      - DATABASE_NAME=testdb
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data:
+
+```
+
+### Bonnes pratiques :
+- Utilisation de variables d’environnement pour configurer l’app et la base
+- Séparation des responsabilités
+- Persistances des données via un volume
+
+---
+
+## Suivi Git
+
+À chaque modification majeure :
+```bash
+git add .
+git commit -m "commentaire / description"
+git push
+```
+
+---
+
+
