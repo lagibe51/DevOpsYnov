@@ -229,8 +229,6 @@ en rendant l'application plus "modulaire"
 
 # TP 2
 
-# TP Docker – Application Express.js
-
 ## Étape 1 – Préparation et Git
 
 - On télécharge le fichier `TP-2-Docker.zip`
