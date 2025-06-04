@@ -23,11 +23,17 @@ docker run hello-world
 ## 
 
 docker run -it ubuntu bash
-# Dans le bash : exit
+
+Dans le bash : exit
+
+# Quelques commandes à tester
+
+```
 docker images
 docker ps -a
 docker run -p 80:80 nginx
 docker run -d -p 80:80 nginx
+```
 
 
 Telechargement de l'image nginx 
