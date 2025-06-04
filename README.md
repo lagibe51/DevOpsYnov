@@ -59,18 +59,45 @@ Lancement avec un volume
 ```
 docker run -d -p 8080:80 -v $(pwd)/index.html:/usr/share/nginx/html/index.html --name web-volume nginx
 ```
-
-
-
+ 
+ 
+### Arret et supression
 ```
-docker stop web-volume && docker rm web-volume
-docker run -d -p 8080:80 --name web-copy nginx
-docker cp index.html web-copy:/usr/share/nginx/html/index.html
+docker stop Volume-nginx && docker rm Volume-nginx
 ```
 
+### Utilisation de docker cp
+```
+docker run -d -p 8080:80 --name Volume-nginx nginx
+docker cp index.html Volume-nginx:/usr/share/nginx/html/index.html
+```
 
+# Creation d'un dockerFile
+```Dockerfile
+FROM nginx
+COPY index.html /usr/share/nginx/html/index.html
+```
 
+## Build du dockerfile
 
+Commandes :
+```bash
+docker build -t nginx .
+docker run -d -p 8081:80 ginx
+```
+
+## Avantages et inconvénients
+### Avantages 
+#### Volume 
+Rapide
+#### Dockerfile
+Permet de partager et de creer différentes versions
+
+### inconvénients 
+#### Volume 
+La creation du volume ne permet pas de créer des versions 
+#### Dockerfile
+Obligation de rebuild à chaque changement 
 
 # MySQL et PhpMyAdmin avec docker run
 
@@ -81,15 +108,3 @@ docker network create tp-net
 docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test --network tp-net mysql:5.7
 docker run -d --name phpmyadmin -p 8082:80 --network tp-net -e PMA_HOST=mysql phpmyadmin/phpmyadmin
 ```
-
-
-
-
-
-
-
-
-
-
-
-
