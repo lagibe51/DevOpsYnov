@@ -51,8 +51,42 @@ docker images
 
 ```
 docker run -d -p 8080:80 -v $(pwd)/index.html:/usr/share/nginx/html/index.html nginx
+
 ```
 
+# Étape 4 – Initialisation Git
+ 
+```bash
+git init
+git add .
+git commit -m "Début du TP"
+```
+Utilisez `git add . && git commit -m "description"` à chaque grande étape.
+ 
+# Étape 5 – Conteneur Web avec volume et docker cp
+ 
+Telechargement de l'image nginx et vérification
+
+```
+docker pull nginx
+docker images
+```
+ 
+ 
+ 
+## Lancement avec un volume
+ 
+```
+docker run -d -p 8080:80 -v $(pwd)/index.html:/usr/share/nginx/html/index.html --name Volume-nginx nginx
+```
+ 
+ 
+ ### Arret et supression
+```
+docker stop Volume-nginx && docker rm Volume-nginx
+docker run -d -p 8080:80 --name Volume-nginx nginx
+docker cp index.html web-copy:/usr/share/nginx/html/index.html
+```
 
 
 
