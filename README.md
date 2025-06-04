@@ -171,4 +171,54 @@ environment:
 
 
 
+# Question 9 
+
+## Lancement du compose de la question 9 
+
+```
+docker compose -f question9.yml up -d
+```
+
+## ping 
+
+Connexion à la partie web 
+
+```
+docker exec -it 162 bash
+```
+
+Ping de app et de db 
+
+```bash
+ping app 
+ping db 
+```
+**Le ping vers app fonctionne** 
+**Le ping vers db de fonctionne pas**
+
+### Analyse via docker inspect
+
+On utilise docker inspect pour vérifier les networks présents 
+```
+docker inspect web 
+docker inspect app 
+docker inspect db 
+```
+On remarque que:
+web à accés uniquement au front 
+app au front et au back 
+db uniquement au back 
+
+## Cas d'usage 
+Dans une appli web 
+On peut utiliser :
+-Le front avec Nginx (web)
+-Le front et le back pour lier le web et la db avec php par exemple (app)
+-Le back avec Mysql (DB)
+
+Cette configuration permet d'isoler les différentes parties de l'application,
+avec plusieurs avantages tels que la sécurité,
+empêcher l'accès à la base de données depuis le web,
+et permettre de modifier l'application ainsi que de changer certains éléments plus facilement,
+en rendant l'application plus "modulaire"
 
