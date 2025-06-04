@@ -27,7 +27,7 @@ docker run -it ubuntu bash
 exit
 ```
 
-# Quelques commandes à tester
+## Quelques commandes à tester
 
 ```
 docker images
@@ -36,7 +36,7 @@ docker run -p 80:80 nginx
 docker run -d -p 80:80 nginx
 ```
 
-# Initialisation Git
+## Initialisation Git
 
 ```bash
 git init
@@ -99,7 +99,7 @@ La creation du volume ne permet pas de créer des versions
 #### Dockerfile
 Obligation de rebuild à chaque changement 
 
-# MySQL et PhpMyAdmin avec docker run
+## MySQL et PhpMyAdmin avec docker run
 
 Installations
 
@@ -120,4 +120,11 @@ Lancement des conteneurs
 docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test --network tp-net mysql:5.7
 docker run -d --name phpmyadmin -p 8082:80 --network tp-net -e PMA_HOST=mysql phpmyadmin/phpmyadmin
 ```
+
+## Docker Compose
+
+Création du fichier `docker-compose.yml` :
+
+QUestions : 
+
 
