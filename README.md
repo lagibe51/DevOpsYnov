@@ -36,7 +36,7 @@ docker run -p 80:80 nginx
 docker run -d -p 80:80 nginx
 ```
 
-# Étape 4 – Initialisation Git
+# Initialisation Git
 
 ```bash
 git init
@@ -45,7 +45,7 @@ git commit -m "Début du TP"
 ```
 Pour la suite du TP : `git add . && git commit -m "description" && git push`
 
-# Étape 5 – Conteneur Web avec volume et docker cp
+# Conteneur Web avec volume et docker cp
 
 Telechargement de l'image nginx et vérification
 
@@ -67,6 +67,21 @@ docker stop web-volume && docker rm web-volume
 docker run -d -p 8080:80 --name web-copy nginx
 docker cp index.html web-copy:/usr/share/nginx/html/index.html
 ```
+
+
+
+
+
+# MySQL et PhpMyAdmin avec docker run
+
+```
+docker pull mysql:5.7
+docker pull phpmyadmin/phpmyadmin
+docker network create tp-net
+docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test --network tp-net mysql:5.7
+docker run -d --name phpmyadmin -p 8082:80 --network tp-net -e PMA_HOST=mysql phpmyadmin/phpmyadmin
+```
+
 
 
 
