@@ -36,19 +36,22 @@ docker run -d -p 80:80 nginx
 ```
 
 
-Telechargement de l'image nginx 
+# Telechargement de l'image nginx 
 
+```
 docker pull nginx
+```
+## Verification 
 
-Verification 
-
+```
 docker images
 
+```
+## Lancement avec un volume 
 
-d. 
-Lancement avec un volume 
-
+```
 docker run -d -p 8080:80 -v $(pwd)/index.html:/usr/share/nginx/html/index.html nginx
+```
 
 
 
