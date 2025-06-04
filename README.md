@@ -101,10 +101,23 @@ Obligation de rebuild à chaque changement
 
 # MySQL et PhpMyAdmin avec docker run
 
+Installations
+
 ```
 docker pull mysql:5.7
 docker pull phpmyadmin/phpmyadmin
+```
+
+Création d'un réseau Docker dédié pour que les conteneurs puissent se parler
+
+```
 docker network create tp-net
+```
+
+Lancement des conteneurs 
+
+```
 docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test --network tp-net mysql:5.7
 docker run -d --name phpmyadmin -p 8082:80 --network tp-net -e PMA_HOST=mysql phpmyadmin/phpmyadmin
 ```
+
