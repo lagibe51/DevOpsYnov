@@ -281,38 +281,33 @@ docker build -t ma_super_app .
 ### Objectif :
 Lancer l’application Node.js + une base de données mySQL
 
-### Exemple avec MongoDB :
+### Exemple avec mysql :
 ```yaml
-version: "3.8"
+version: '3.8'
 
 services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+
   app:
     build: .
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_PORT=3306
-      - DATABASE_USERNAME=user
-      - DATABASE_PASSWORD=password
-      - DATABASE_NAME=testdb
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_USERNAME: appuser 
+      DATABASE_PASSWORD: secret
+      DATABASE_NAME: appdb
     depends_on:
       - db
-
-  db:
-    image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=testdb
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
-    ports:
-      - "3306:3306"
-
-volumes:
-  db_data:
 
 ```
 
